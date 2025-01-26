@@ -17,6 +17,7 @@ public class SimpleUdpServer {
 			while (true) {
 				receivedPacket = new DatagramPacket(buffer, buffer.length);
 				
+                //receive data packet from client
 				socket.receive(receivedPacket);
 				String msgReceived = new String(receivedPacket.getData(), 0, receivedPacket.getLength());
 				
@@ -34,11 +35,10 @@ public class SimpleUdpServer {
 				//reset buffer after receiving message
 				buffer = new byte[4096];
 				
+                //send response back to client
 				String response = "Message received";
 				byte[] responseBuffer = response.getBytes();
 				DatagramPacket packet = new DatagramPacket(responseBuffer, responseBuffer.length, receivedPacket.getAddress(), receivedPacket.getPort());
-				
-				//send response back to client
 				socket.send(packet);
 				
 			}

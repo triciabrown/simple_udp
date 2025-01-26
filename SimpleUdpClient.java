@@ -29,15 +29,18 @@ public class SimpleUdpClient {
 				
 				clientSocket.send(udpPacket);
 				
+                //quit program on exit command
 				if (userInput.equals("exit")) {
 					clientSocket.close();
 					break;
 				}
 
+                //receive message back from server
                 byte[] receiveBuffer = new byte[1024];
                 DatagramPacket receivePacket = new DatagramPacket(receiveBuffer, receiveBuffer.length);
                 clientSocket.receive(receivePacket);
 
+                //print server response
                 String response = new String(receivePacket.getData(), 0, receivePacket.getLength());
                 System.out.println("Server response: " + response);
 				
